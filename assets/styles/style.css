@@ -4,7 +4,18 @@
   box-sizing: border-box;
 }
 
-.all-constainers {
+body {
+  background-color: #1b1a1a;
+  color: #f1f1f1;
+
+}
+
+.all-containers {
+  padding: 20px 0;
+}
+
+h1 {
+  text-align: center;
 
 }
 
@@ -15,5 +26,25 @@
   height: fit-content;
   box-shadow: 1px 3px 8px #1b1a1a;
   border-radius: 5px;
+  gap: 2rem;
+  padding: 30px;
 }
 
+.search {
+  width: 60%;
+  margin: 10px auto;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+}
+
+img {
+  height: 250px;
+}
+
+.movie {
+  line-height: 10px;
+
+}
