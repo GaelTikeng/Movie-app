@@ -3,7 +3,7 @@ const displayMovies = document.querySelector('.display');
 
 async function fetchData() {
   const inputSearch = document.querySelector('.input').value;
-  const url = `http://www.omdbapi.com/?s=blade&apikey=80b18414`;
+  const url = `http://www.omdbapi.com/?s=${inputSearch}&apikey=80b18414`;
 
   await fetch(url)
     .then((response) => response.json())
@@ -27,15 +27,16 @@ button.addEventListener('click', fetchData);
 
 const getMovie = async () => {
   let movieId = JSON.parse(localStorage.getItem('movieId'))
-  console.log(movieId)
+  
   const url = `http://www.omdbapi.com/?i=${movieId}&apikey=80b18414`;
 
   await fetch(url)
-    .then((response) => response.json)
-    .then((response) => {
-      console.log(response)
-    })
-    .catch((err) => console.log("error occured", err))
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log('An error occured', error))
+  // const response = await fetch(url)
+  // const movie = await response.json()
+  
 
 }
 
@@ -45,8 +46,8 @@ const selectedMovie = (id) => {
 }
 
 const displayMovie = async() => {
-  const inputSearch = document.querySelector('.input').value;
-  const url = `http://www.omdbapi.com/?s=blade&apikey=80b18414`;
+  // const inputSearch = document.querySelector('.input').value;
+  const url = `http://www.omdbapi.com/?s=scorpion&apikey=80b18414`;
 
   await fetch(url)
     .then((response) => response.json())
