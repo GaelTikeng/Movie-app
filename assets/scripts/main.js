@@ -1,40 +1,66 @@
-const button = document.querySelector('.btn')
+const button = document.querySelector('.btn');
+const displayMovies = document.querySelector('.display');
 
-async function fetchData () {
-  const url = "'https://streaming-availability.p.rapidapi.com/v2/services'"
+async function fetchData() {
+  const inputSearch = document.querySelector('.input').value;
+  const url = `https://www.omdbapi.com/?s=${inputSearch}&apikey=80b18414`;
+
+  await fetch(url)
+    .then((response) => response.json())
+    .then(({ Search }) => {
+      console.log(Search);
+      displayMovies.innerHTML = Search.map((movie, index) => {
+        return `<div class="movie" key=${index}>
+            <img src=${movie.Poster} alt="movies" />
+            <h3 class="title">${movie.Title}</h3>
+            <h3>${movie.Year}</h3>
+            <a onclick="selectedMovie('${movie.imdbID}')" href="#" class="a-tag">Movie details</a>
+          </div>`;
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log(inputSearch);
+}
+button.addEventListener('click', fetchData);
+
+const getMovie = async () => {
+  let movieId = JSON.parse(localStorage.getItem('movieId'))
   
-  // try {
-  //   const response = await fetch(url)
-  //   console.log(response)
-  //   if (!response.ok) {
-  //     throw new Error ("Faile to fetch datas" `${response.status}`)
-  //   }
-  //   return await response.json()
-  // } catch(e) {
-  //   console.log(e)
-  // }
+  const url = `https://www.omdbapi.com/?i=${movieId}&apikey=80b18414`;
 
-  // fetch(url)
-  //   .then(response => response.json())
-  //   .then(data => console.log(data))
-  //   .catch((err) => {
-  //     console.log(err)
-  //   })
-
-  const urll = "http://www.omdbapi.com/?i=tt3896198&apikey=80b18414"
-
-  try {
-    const response = await fetch(urll);
-    const result = await response.json();
-    console.log(result);
-    console.log(typeof result)
-    console.log(result.Title)
-    console.log(result.Poster)
-  } catch (error) {
-    console.error(error);
-  }
-
+  await fetch(url)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log('An error occured', error))
+  
 
 }
 
-button.addEventListener('click', fetchData)
+const selectedMovie = (id) => {
+  localStorage.setItem('movieId', JSON.stringify(id))
+  console.log(id)
+}
+
+const displayMovie = async() => {
+  
+  const url = `https://www.omdbapi.com/?s=scorpion&apikey=80b18414`;
+
+  await fetch(url)
+    .then((response) => response.json())
+    .then(({ Search }) => {
+      console.log(Search);
+      document.querySelector('.content').innerHTML = Search.map((movie, index) => {
+        return `<div class="movie" key=${index}>
+            <img src=${movie.Poster} alt="movies" />
+            <h3 class="title">${movie.Title}</h3>
+            <h3>${movie.Year}</h3>
+            <a onclick="selectedMovie('${movie.imdbID}')" href="#" class="a-tag">Movie details</a>
+          </div>`;
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
