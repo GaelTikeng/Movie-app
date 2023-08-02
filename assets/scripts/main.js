@@ -34,8 +34,6 @@ const getMovie = async () => {
     .then((response) => response.json())
     .then((data) => console.log(data))
     .catch((error) => console.log('An error occured', error))
-  // const response = await fetch(url)
-  // const movie = await response.json()
   
 
 }
@@ -46,7 +44,7 @@ const selectedMovie = (id) => {
 }
 
 const displayMovie = async() => {
-  // const inputSearch = document.querySelector('.input').value;
+  
   const url = `http://www.omdbapi.com/?s=scorpion&apikey=80b18414`;
 
   await fetch(url)
